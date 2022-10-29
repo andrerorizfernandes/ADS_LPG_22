@@ -14,6 +14,8 @@ object frmLivro: TfrmLivro
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object Label4: TLabel
@@ -72,6 +74,7 @@ object frmLivro: TfrmLivro
       MaxLength = 9
       NumbersOnly = True
       TabOrder = 0
+      OnKeyPress = edtCodigoKeyPress
     end
     object btnPesquisar: TBitBtn
       Left = 82
@@ -86,6 +89,7 @@ object frmLivro: TfrmLivro
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      OnClick = btnPesquisarClick
     end
     object edtDescricao: TEdit
       Left = 6
@@ -117,9 +121,7 @@ object frmLivro: TfrmLivro
     Align = alRight
     Caption = '&Inserir'
     TabOrder = 1
-    ExplicitLeft = 432
-    ExplicitTop = 169
-    ExplicitHeight = 31
+    OnClick = btnInserirClick
   end
   object btnEditar: TBitBtn
     Left = 183
@@ -129,9 +131,7 @@ object frmLivro: TfrmLivro
     Align = alRight
     Caption = '&Editar'
     TabOrder = 2
-    ExplicitLeft = 432
-    ExplicitTop = 169
-    ExplicitHeight = 31
+    OnClick = btnEditarClick
   end
   object btnExcluir: TBitBtn
     Left = 266
@@ -141,9 +141,7 @@ object frmLivro: TfrmLivro
     Align = alRight
     Caption = 'E&xcluir'
     TabOrder = 3
-    ExplicitLeft = 432
-    ExplicitTop = 169
-    ExplicitHeight = 31
+    OnClick = btnExcluirClick
   end
   object btnGravar: TBitBtn
     Left = 349
@@ -153,9 +151,7 @@ object frmLivro: TfrmLivro
     Align = alRight
     Caption = '&Gravar'
     TabOrder = 4
-    ExplicitLeft = 432
-    ExplicitTop = 169
-    ExplicitHeight = 31
+    OnClick = btnGravarClick
   end
   object btnCancelar: TBitBtn
     Left = 432
@@ -165,7 +161,6 @@ object frmLivro: TfrmLivro
     Align = alRight
     Caption = '&Cancelar'
     TabOrder = 5
-    ExplicitTop = 169
-    ExplicitHeight = 31
+    OnClick = btnCancelarClick
   end
 end
