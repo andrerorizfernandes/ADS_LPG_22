@@ -202,4 +202,14 @@ object DM: TDM
     Left = 280
     Top = 112
   end
+  object qryPesquisa: TFDQuery
+    Connection = Conexao
+    Left = 344
+    Top = 96
+  end
+  object dsrPesquisa: TDataSource
+    DataSet = qryPesquisa
+    Left = 352
+    Top = 112
+  end
 end

@@ -40,6 +40,8 @@ type
     qryLivrodescricao: TStringField;
     qryLivroautor: TStringField;
     qryLivroano: TIntegerField;
+    qryPesquisa: TFDQuery;
+    dsrPesquisa: TDataSource;
   private
     { Private declarations }
   public

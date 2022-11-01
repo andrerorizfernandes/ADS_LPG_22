@@ -6,7 +6,8 @@ uses
   uDM in 'uDM.pas' {DM: TDataModule},
   uAluno in 'uAluno.pas' {frmAluno},
   uAlunoDetalhe in 'uAlunoDetalhe.pas' {frmAlunoDetalhe},
-  uLivro in 'uLivro.pas' {frmLivro};
+  uLivro in 'uLivro.pas' {frmLivro},
+  uPesquisa in 'uPesquisa.pas' {frmPesquisa};
 
 {$R *.res}
 

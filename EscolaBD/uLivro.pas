@@ -7,6 +7,13 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
+  TTipoOperacao = (
+    topInserir = 0,
+    topEditar = 1,
+    topAchouPesquisa = 2,
+    topPadrao = 3
+  );
+
   TfrmLivro = class(TForm)
     pnlLivro: TPanel;
     btnInserir: TBitBtn;
@@ -34,6 +41,7 @@ type
     procedure btnPesquisarClick(Sender: TObject);
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
     procedure btnGravarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     procedure AbrirQueryLivro;
     procedure FecharQueryLivro;
@@ -44,9 +52,13 @@ type
     procedure Cancelar;
     procedure Pesquisar;
     procedure Gravar;
+    procedure ControleDeBotoes(pTipoOperacao: TTipoOperacao);
+    procedure ControlarVisibilidadeCampo(
+      pCampo: TEdit;
+      pHabilitar: Boolean;
+      pLimparCampo: Boolean = False);
 
     function ExisteLivro(const pCodigoLivro: Integer): Boolean;
-
 
     { Private declarations }
   public
@@ -101,13 +113,75 @@ procedure TfrmLivro.Cancelar;
 begin
   Caption := 'Livro';
   DM.qryLivro.Cancel;
+  ControleDeBotoes(topPadrao);
+  ControlarVisibilidadeCampo(edtCodigo, True);
   edtCodigo.SetFocus;
+end;
+
+procedure TfrmLivro.ControlarVisibilidadeCampo(
+  pCampo: TEdit;
+  pHabilitar: Boolean;
+  pLimparCampo: Boolean = False);
+begin
+  pCampo.Enabled := pHabilitar;
+
+  if pHabilitar then
+    pCampo.Color := clWindow
+  else
+    pCampo.Color := clBtnFace;
+
+  if pLimparCampo then
+    pCampo.Clear;
+end;
+
+procedure TfrmLivro.ControleDeBotoes(pTipoOperacao: TTipoOperacao);
+begin
+  case pTipoOperacao of
+    topInserir:
+    begin
+      btnInserir.Enabled := False;
+      btnEditar.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnGravar.Enabled := True;
+      btnCancelar.Enabled := True;
+      btnPesquisar.Enabled := False;
+    end;
+    topEditar:
+    begin
+      btnInserir.Enabled := False;
+      btnEditar.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnGravar.Enabled := True;
+      btnCancelar.Enabled := True;
+      btnPesquisar.Enabled := False;
+    end;
+    topAchouPesquisa:
+    begin
+      btnInserir.Enabled := False;
+      btnEditar.Enabled := True;
+      btnExcluir.Enabled := True;
+      btnGravar.Enabled := False;
+      btnCancelar.Enabled := True;
+      btnPesquisar.Enabled := True;
+    end;
+    topPadrao:
+    begin
+      btnInserir.Enabled := True;
+      btnEditar.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnGravar.Enabled := False;
+      btnCancelar.Enabled := False;
+      btnPesquisar.Enabled := True;
+    end;
+  end;
 end;
 
 procedure TfrmLivro.Editar;
 begin
   Caption := 'Livro [Editando]';
   DM.qryLivro.Edit;
+  ControleDeBotoes(topEditar);
+  ControlarVisibilidadeCampo(edtCodigo, False);
   edtDescricao.SetFocus;
 end;
 
@@ -128,6 +202,12 @@ end;
 procedure TfrmLivro.FecharQueryLivro;
 begin
   DM.qryLivro.Close;
+end;
+
+procedure TfrmLivro.FormActivate(Sender: TObject);
+begin
+  ControleDeBotoes(topPadrao);
+  ControlarVisibilidadeCampo(edtCodigo, True);
 end;
 
 procedure TfrmLivro.FormCreate(Sender: TObject);
@@ -169,6 +249,9 @@ begin
     end;
 
     LimparCampos;
+    Caption := 'Livro';
+    ControleDeBotoes(topPadrao);
+    ControlarVisibilidadeCampo(edtCodigo, True);
     ShowMessage('Operação concluída com sucesso');
   end;
 end;
@@ -178,6 +261,8 @@ begin
   Caption := 'Livro [Inserindo]';
   DM.qryLivro.Append;
   LimparCampos;
+  ControleDeBotoes(topInserir);
+  ControlarVisibilidadeCampo(edtCodigo, False, True);
   edtDescricao.SetFocus;
 end;
 
@@ -202,12 +287,14 @@ begin
     LimparCampos;
     ShowMessage('O código informado não existe');
     edtCodigo.SetFocus;
+    ControleDeBotoes(topPadrao);
     Exit;
   end;
 
   edtDescricao.Text := DM.qryLivrodescricao.AsString;
   edtAutor.Text := DM.qryLivroAutor.AsString;
   edtAno.Text := DM.qryLivroano.AsString;
+  ControleDeBotoes(topAchouPesquisa);
 end;
 
 function TfrmLivro.ExisteLivro(const pCodigoLivro: Integer): Boolean;

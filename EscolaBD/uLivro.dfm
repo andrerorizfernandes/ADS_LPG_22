@@ -14,6 +14,7 @@ object frmLivro: TfrmLivro
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnActivate = FormActivate
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
