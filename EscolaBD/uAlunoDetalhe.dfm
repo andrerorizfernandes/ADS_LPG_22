@@ -96,9 +96,6 @@ object frmAlunoDetalhe: TfrmAlunoDetalhe
     Caption = '&Gravar'
     TabOrder = 1
     OnClick = btnGravarClick
-    ExplicitLeft = 283
-    ExplicitTop = 52
-    ExplicitHeight = 25
   end
   object btnCancelar: TBitBtn
     Left = 383
@@ -110,8 +107,14 @@ object frmAlunoDetalhe: TfrmAlunoDetalhe
     ModalResult = 2
     TabOrder = 2
     OnClick = btnCancelarClick
-    ExplicitLeft = 370
-    ExplicitTop = 52
-    ExplicitHeight = 25
+  end
+  object Button1: TButton
+    Left = 104
+    Top = 96
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 3
+    OnClick = Button1Click
   end
 end

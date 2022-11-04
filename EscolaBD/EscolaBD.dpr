@@ -7,7 +7,8 @@ uses
   uAluno in 'uAluno.pas' {frmAluno},
   uAlunoDetalhe in 'uAlunoDetalhe.pas' {frmAlunoDetalhe},
   uLivro in 'uLivro.pas' {frmLivro},
-  uPesquisa in 'uPesquisa.pas' {frmPesquisa};
+  uPesquisa in 'uPesquisa.pas' {frmPesquisa},
+  uFunc in 'uFunc.pas';
 
 {$R *.res}
 

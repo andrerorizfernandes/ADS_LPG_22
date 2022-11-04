@@ -68,7 +68,7 @@ type
 implementation
 
 uses
-  uDM, Data.DB;
+  uDM, Data.DB, uFunc;
 
 {$R *.dfm}
 
@@ -105,7 +105,18 @@ begin
 end;
 
 procedure TfrmLivro.btnPesquisarClick(Sender: TObject);
+const
+  SQL_LIVRO =
+                 'Select'
+  + sLineBreak + '  codlivro,'
+  + sLineBreak + '  descricao,'
+  + sLineBreak + '  autor,'
+  + sLineBreak + '  ano'
+  + sLineBreak + 'From'
+  + sLineBreak + '  Livro';
+  IDENTIFICADOR_LIVRO = 'codlivro';
 begin
+  edtCodigo.Text := PesquisaDados(SQL_LIVRO, IDENTIFICADOR_LIVRO);
   Pesquisar;
 end;
 

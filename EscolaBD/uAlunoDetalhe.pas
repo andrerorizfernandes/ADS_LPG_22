@@ -19,9 +19,11 @@ type
     dblCidade: TDBLookupComboBox;
     lblCidade: TLabel;
     dbeUf: TDBEdit;
+    Button1: TButton;
     procedure FormActivate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     FAlterando: Boolean;
     procedure PrepararAmbiente;
@@ -37,7 +39,7 @@ type
 implementation
 
 uses
-  uDM, Data.DB;
+  uDM, Data.DB, uFunc;
 
 {$R *.dfm}
 
@@ -54,6 +56,16 @@ begin
   Gravar;
 
   Close;
+end;
+
+procedure TfrmAlunoDetalhe.Button1Click(Sender: TObject);
+const
+  SQL = 'select * from cidade';
+var
+  r: string;
+begin
+  r := PesquisaDados(SQL, 'codcidade');
+  ShowMessage(r);
 end;
 
 procedure TfrmAlunoDetalhe.Cancelar;

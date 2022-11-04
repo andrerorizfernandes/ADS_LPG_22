@@ -203,6 +203,7 @@ object DM: TDM
     Top = 112
   end
   object qryPesquisa: TFDQuery
+    FilterOptions = [foCaseInsensitive]
     Connection = Conexao
     Left = 344
     Top = 96
